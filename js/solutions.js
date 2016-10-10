@@ -1,14 +1,14 @@
 window.exercise = {
   one() {
-    class AbstractClass {
+    class Class1 {
       constructor() {
-        if (new.target == AbstractClass) {
+        if (new.target == Class1) {
           throw new Error('This guy is abstract');
         }
       }
     }
 
-    class ConcreteClass extends AbstractClass {
+    class Class2 extends Class1 {
       constructor() {
         super();
         this.number = 0;
@@ -26,8 +26,8 @@ window.exercise = {
       }
     }
     return {
-      Class1: AbstractClass,
-      Class2: ConcreteClass
+      Class1,
+      Class2
     };
   },
   two() {
@@ -93,8 +93,8 @@ window.exercise = {
     }
  
     return {
-      PiGenerator: PiGenerator,
-      taskRunner: taskRunner
+      PiGenerator,
+      taskRunner
     }
   }
 };
