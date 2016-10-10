@@ -47,7 +47,7 @@ classesSuite.addTest(new TestCase(desc, () => {
 /**
  * Exercise 2: Itertables
  */
-let iteratorSuite = new TestSuite('Iterable Objects');
+let iteratorSuite = new TestSuite('Iterable Objects &amp; Symbol.iterator');
 let e2 = window.exercise.two();
 
 iteratorSuite.addTest(new TestCase('<code>Iterable</code> has a <code>[Symbol.iterator]</code> method', () => {
