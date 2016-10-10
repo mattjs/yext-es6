@@ -77,7 +77,7 @@ let testFibonacci = (iterable, max) => {
   return passed && expected.length === 0;
 };
 
-iteratorSuite.addTest(new TestCase('Test that <code>Iterable</code> returns fibonacci numbers below 10 using <code>for-in</code>', () => {
+iteratorSuite.addTest(new TestCase('<code>Iterable</code> returns fibonacci numbers below 10 using <code>for-in</code>', () => {
   try { 
     let iterable = new e2.Iterable();
     return testFibonacci(iterable, 10);
@@ -85,7 +85,7 @@ iteratorSuite.addTest(new TestCase('Test that <code>Iterable</code> returns fibo
   return false;
 }));
 
-iteratorSuite.addTest(new TestCase('Test that the state of <code>Iterable</code> is reset properly (previous test passes twice in a row)', () => {
+iteratorSuite.addTest(new TestCase('The state of <code>Iterable</code> is reset properly (previous test passes twice in a row)', () => {
   try {
     let iterable = new e2.Iterable();
      return testFibonacci(iterable, 10) && testFibonacci(iterable, 10);
@@ -124,10 +124,9 @@ generatorSuite.addTest(new TestCase('<code>PiGenerator</code> generates the firs
   return true;
 }));
 
-let events = [];
-let taskRunnerTest = new TestCase('<code>taskRunner</code> can run asynchronous tasks', () => {
-  let callback,
-      failed = false;
+let taskRunner1 = new TestCase('<code>taskRunner</code> can run asynchronous tasks', () => {
+  let failed = false,
+      callback;
   function *def() {
     yield (cb) => {
       setTimeout(function() {
@@ -139,7 +138,7 @@ let taskRunnerTest = new TestCase('<code>taskRunner</code> can run asynchronous 
       cb();
       callback({
         passed: true,
-        test: taskRunnerTest
+        test: taskRunner1
       }); 
     }
     failed = true;
@@ -157,6 +156,44 @@ let taskRunnerTest = new TestCase('<code>taskRunner</code> can run asynchronous 
   return false;
 });
 
-generatorSuite.addTest(taskRunnerTest);
+let taskRunner2 = new TestCase('<code>taskRunner</code> can run async and immediate tasks', () => { 
+  let failed = false,
+      callback;
+  function *def() {
+    yield (cb) => {
+      setTimeout(function() {
+        cb();
+      }, 2000);
+    }
+    
+    yield (cb) => { 
+      cb();
+    }
+
+    yield (() => {
+      callback({
+        passed: true,
+        test: taskRunner2
+      }); 
+      return 1; // Yield random value
+    })()
+
+    failed = true;
+  }
+  
+  try {
+    e3.taskRunner(def);
+
+    if (!failed) {
+      return (cb) => {
+        callback = cb;
+      }
+    }
+  } catch(e) {}
+  return false;
+});
+
+generatorSuite.addTest(taskRunner1);
+generatorSuite.addTest(taskRunner2);
 
 new TestRunner(classesSuite, iteratorSuite, generatorSuite);
