@@ -1,0 +1,106 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+body > h1 {
+  font-size: 30px;
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+body > section {
+  padding: 0 20px;
+  margin: 20px auto;
+}
+
+button {
+  background: #ddd;
+  padding: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+code {
+  font-family: Courier, monospace;
+}
+
+section > h1 {
+  font-size: 20px;
+  background: #ddd;
+  padding: 10px 8px;
+}
+
+section > ul {
+  border: 1px solid #ddd;
+}
+
+section section h1 {
+  background: #5252d4;
+  color: #fff;
+}
+
+section li {
+  background: #fafafa;
+  padding: 8px;
+}
+
+section li:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+section label {
+  display: inline-block;
+}
+
+.empty-message {
+  padding: 8px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+}
+
+.status-passed,
+.status-failed,
+.status-pending {
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.failed-msg,
+.passed-msg,
+.pending-msg {
+  display: none;
+}
+
+.status-passed .passed-msg {
+  display: block;
+}
+
+.status-failed .failed-msg {
+  display: block;
+}
+
+.status-pending .pending-msg {
+  display: block;
+}
+
+.status-passed {
+  background: #91e66c; 
+}
+
+.status-failed {
+  background: red;
+}
+
+.status-pending {
+  background: orange;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}

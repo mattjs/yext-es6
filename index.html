@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ES6 Training</title>
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <script src="js/jquery-1.10.2.min.js"></script> 
+    <script src="js/testrunner.js"></script> 
+    <script src="js/exercises.js"></script> 
+  </head>
+  <body>
+    <script type="text/template" class="js-test-suite-template">
+      <section>
+        <h1>{{suiteName}}</h1>
+        <ul></ul>
+      </section>
+    </script> 
+    <script type="text/template" class="js-test-result-template">
+      <li>
+        <label class="status-{{testStatus}}">
+          <span class="passed-msg">Passed</span>
+          <span class="failed-msg">Failed</span>
+          <span class="pending-msg">Pending</span>
+        </label>
+        {{testName}}
+      </li>
+    </script> 
+    <script type="text/template" class="js-suite-list-item-template">
+      <li>
+        <button>Run Suite</button>
+        {{suiteName}}
+      </li>
+    </script>
+    <h1>ES6 Training</h1>
+    <section>
+      <h1>Test Suites</h1>
+      <ul class="suites-list js-suites-list"></ul>
+    </section> 
+    <section>
+      <h1>Test Results</h1>
+      <div class="test-results js-test-results">
+        <div class="empty-message">
+          Run a suite above
+        </div>
+       </div>
+    </section>
+    <script src="js/tests.js"></script>
+  </body>
+</html>
