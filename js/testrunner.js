@@ -6,36 +6,47 @@ class TestRunner {
    * @param {Array.<TestSuite>} ..suites
    */
   constructor(...suites) {
-    this.suiteTemplate = $('.js-test-suite-template').html();   
+    this.suiteTemplate = $('.js-test-suite-template').html(); 
     this.resultTemplate = $('.js-test-result-template').html();
     this.suiteListItemTemplate = $('.js-suite-list-item-template').html(); 
+
+    this.$runAllTestsItem = $('.js-run-all-tests-item');
 
     this.suites = suites;
     
     this.renderSuiteList();
+    this.bindRunAll();
   }
   
   renderSuiteList() {
-    let items = [];
     for (let suite of this.suites) {
        let html = this.suiteListItemTemplate.replace('{{suiteName}}', suite.name);
        let $element = this.bindSuite(html, suite);
-       items.push($element);
+       $element.insertBefore(this.$runAllTestsItem);
     }
-    $('.js-suites-list').append(items);
   }
 
   bindSuite(html, suite) {
     const $element = $(html);
     $element.find('button').on('click', () => {
+      $('.js-test-results').empty()
       this.runSuite(suite);
     });
     return $element;
   }
 
+  bindRunAll() {
+    this.$runAllTestsItem.find('button').on('click', () => { 
+      $('.js-test-results').empty()
+      for (let suite of this.suites) {
+        this.runSuite(suite);
+      }
+    });
+  }
+
   runSuite(suite) {
     var $suite = $(this.suiteTemplate.replace('{{suiteName}}', suite.name));
-    $('.js-test-results').empty().append($suite);
+    $('.js-test-results').append($suite);
     for (let result of suite.run()) {
       if (typeof result.passed === 'function') { // Async result
         let $content = $(this.renderTestResult(result.test.name, 'pending'));
